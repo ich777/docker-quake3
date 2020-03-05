@@ -6,7 +6,7 @@ RUN apt-get update && \
 	apt-get -y install --no-install-recommends screen unzip && \
 	rm -rf /var/lib/apt/lists/*
 
-ENV DATA_DIR="/serverdata"
+ENV DATA_DIR="/quake3"
 ENV GAME_PARAMS="template"
 ENV UMASK=000
 ENV UID=99
