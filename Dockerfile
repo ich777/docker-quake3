@@ -2,8 +2,9 @@ FROM ich777/debian-baseimage
 
 LABEL maintainer="admin@minenet.at"
 
-RUN apt-get update && \
-	apt-get -y install --no-install-recommends screen unzip && \
+RUN dpkg --add-architecture i386
+	apt-get update && \
+	apt-get -y install --no-install-recommends screen unzip lib32z1 && \
 	rm -rf /var/lib/apt/lists/*
 
 ENV DATA_DIR="/quake3"
