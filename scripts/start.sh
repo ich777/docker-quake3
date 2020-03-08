@@ -31,18 +31,19 @@ if [ ! -f ${DATA_DIR}/q3ded ]; then
         sleep infinity
 	fi
     chmod +x ${DATA_DIR}/quake.run
-    ${DATA_DIR}/quake.run --target ${DATA_DIR}/quake3/install
+    ${DATA_DIR}/quake.run --target ${DATA_DIR}/quake3/install > /dev/null
     unzip ${DATA_DIR}/quake.zip
     rm quake.run
     rm quake.zip
     mkdir -p /tmp/quake3
-    mv ${DATA_DIR}/install/bin/Linux/x86/* /tmp/quake3/
+    mv ${DATA_DIR}/quake3/install/bin/Linux/x86/* /tmp/quake3/
     mv ${DATA_DIR}/Quake*/linux/* /tmp/quake3/
     rm -R ${DATA_DIR}/*
     mv /tmp/quake3/* ${DATA_DIR}/
-    mkdir -p ${DATA_DIR}/.q3d/baseq3
+    rm -R /tmp/quake3
+    mkdir -p ${DATA_DIR}/.q3a/baseq3
     chown -R ${UID}:${GID} ${DATA_DIR}
-    chmod -R ${DATA_PERM} ${DATA_DIR}    
+    chmod -R ${DATA_PERM} ${DATA_DIR}
 fi
 
 echo "---Starting...---"
