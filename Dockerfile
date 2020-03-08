@@ -8,6 +8,8 @@ RUN apt-get update && \
 
 ENV DATA_DIR="/quake3"
 ENV GAME_PARAMS="template"
+ENV DL_URL_PR="https://ftp.gwdg.de/pub/misc/ftp.idsoftware.com/idstuff/quake3/linux/linuxq3apoint-1.32b-3.x86.run"
+ENV DL_URL_PATCH="https://ftp.gwdg.de/pub/misc/ftp.idsoftware.com/idstuff/quake3/quake3-1.32c.zip"
 ENV UMASK=000
 ENV UID=99
 ENV GID=100
