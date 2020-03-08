@@ -17,6 +17,7 @@ fi
 
 echo "---Checking if Quake3 is installed---"
 if [ ! -f ${DATA_DIR}/q3ded ]; then
+	echo "---Quake 3 not found, downloading...---"
 	cd ${DATA_DIR}
 	if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${DATA_DIR}/quake.run "${DL_URL_PR}" ; then
     	echo "---Successfully downloaded Quake3---"
@@ -44,6 +45,8 @@ if [ ! -f ${DATA_DIR}/q3ded ]; then
     mkdir -p ${DATA_DIR}/.q3a/baseq3
     chown -R ${UID}:${GID} ${DATA_DIR}
     chmod -R ${DATA_PERM} ${DATA_DIR}
+else
+	echo "---Quake 3 found, continuing...---"
 fi
 
 echo "---Starting...---"
