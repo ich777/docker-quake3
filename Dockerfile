@@ -8,7 +8,9 @@ RUN dpkg --add-architecture i386 && \
 	rm -rf /var/lib/apt/lists/*
 
 ENV DATA_DIR="/quake3"
-ENV GAME_PARAMS="template"
+ENV GAME_PARAMS="+set sv_punkbuster 0 +set fs_game osp +set com_hunkMegs 32"
+ENV Q3_PORT=27960
+ENV Q3_MAP="q3dm0"
 ENV DL_URL_PR="https://ftp.gwdg.de/pub/misc/ftp.idsoftware.com/idstuff/quake3/linux/linuxq3apoint-1.32b-3.x86.run"
 ENV DL_URL_PATCH="https://ftp.gwdg.de/pub/misc/ftp.idsoftware.com/idstuff/quake3/quake3-1.32c.zip"
 ENV UMASK=000
