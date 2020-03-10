@@ -31,6 +31,19 @@ else
 	echo "---'server.cfg' found, continuing---"
 fi
 
+echo "---Checking if 'maprotation.cfg' is present---"
+if [ ! -f ${DATA_DIR}/.q3a/baseq3/server.cfg ]; then
+	echo "--- No 'server.cfg' found, downloading---"
+    cd ${DATA_DIR}/.q3a/baseq3
+	if wget -q -nc --show-progress --progress=bar:force:noscroll https://raw.githubusercontent.com/ich777/docker-quake3/master/config/maprotation.cfg ; then
+		echo "---Successfully downloaded 'maprotation.cfg'---"
+	else
+		echo "---Can't download 'maprotation.cfg', continuing...---"
+	fi
+else
+	echo "---'maprotation.cfg' found, continuing---"
+fi
+
 echo "---Server ready---"
 chmod -R ${DATA_PERM} ${DATA_DIR}
 
