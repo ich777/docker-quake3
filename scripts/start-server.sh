@@ -32,7 +32,7 @@ else
 fi
 
 echo "---Checking if 'maprotation.cfg' is present---"
-if [ ! -f ${DATA_DIR}/.q3a/baseq3/server.cfg ]; then
+if [ ! -f ${DATA_DIR}/.q3a/baseq3/maprotation.cfg ]; then
 	echo "--- No 'server.cfg' found, downloading---"
     cd ${DATA_DIR}/.q3a/baseq3
 	if wget -q -nc --show-progress --progress=bar:force:noscroll https://raw.githubusercontent.com/ich777/docker-quake3/master/config/maprotation.cfg ; then
