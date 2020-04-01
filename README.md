@@ -9,7 +9,7 @@ Configuring the server: Your server.cfg and maprotationfile.cfg is located into 
 ## Env params
 | Name | Value | Example |
 | --- | --- | --- |
-| SERVER_DIR | Folder for gamefile | /serverdata/serverfiles |
+| SERVER_DIR | Folder for gamefile | /quake3 |
 | GAME_PARAMS | Enter your preferred game version | +set sv_punkbuster 0 +set fs_game osp +set com_hunkMegs 32 |
 | Q3_PORT | The Quake III Server base port (you have to expose this and the following 3 port from this port on) | 27960 |
 | Q3_MAP | The prefered startup map | q3dm0 |
