@@ -49,4 +49,4 @@ chmod -R ${DATA_PERM} ${DATA_DIR}
 
 echo "---Starting server---"
 cd ${DATA_DIR}
-${DATA_DIR}/q3ded +set fs_basepath ${DATA_DIR} +set net_ip 0.0.0.0 +set dedicated 1 +map ${Q3_MAP} +set net_port ${Q3_PORT} +exec server.cfg
+${DATA_DIR}/q3ded +set fs_basepath ${DATA_DIR} +set net_ip 0.0.0.0 +set dedicated 1 +map ${Q3_MAP} +set net_port ${Q3_PORT} +exec server.cfg ${GAME_PARAMS}
