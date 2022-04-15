@@ -1,18 +1,22 @@
 #!/bin/bash
-echo "---Checking if UID: ${UID} matches user---"
+echo "---Ensuring UID: ${UID} matches user---"
 usermod -u ${UID} ${USER}
-echo "---Checking if GID: ${GID} matches user---"
+echo "---Ensuring GID: ${GID} matches user---"
+groupmod -g ${GID} ${USER} > /dev/null 2>&1 ||:
 usermod -g ${GID} ${USER}
 echo "---Setting umask to ${UMASK}---"
 umask ${UMASK}
 
 echo "---Checking for optional scripts---"
-if [ -f /opt/scripts/user.sh ]; then
-	echo "---Found optional script, executing---"
-    chmod +x /opt/scripts/user.sh
-    /opt/scripts/user.sh
+cp -f /opt/custom/user.sh /opt/scripts/start-user.sh > /dev/null 2>&1 ||:
+cp -f /opt/scripts/user.sh /opt/scripts/start-user.sh > /dev/null 2>&1 ||:
+
+if [ -f /opt/scripts/start-user.sh ]; then
+    echo "---Found optional script, executing---"
+    chmod -f +x /opt/scripts/start-user.sh.sh ||:
+    /opt/scripts/start-user.sh || echo "---Optional Script has thrown an Error---"
 else
-	echo "---No optional script found, continuing---"
+    echo "---No optional script found, continuing---"
 fi
 
 echo "---Checking if Quake3 is installed---"
@@ -43,12 +47,28 @@ if [ ! -f ${DATA_DIR}/q3ded ]; then
     mv /tmp/quake3/* ${DATA_DIR}/
     rm -R /tmp/quake3
     mkdir -p ${DATA_DIR}/.q3a/baseq3
-    chown -R ${UID}:${GID} ${DATA_DIR}
-    chmod -R ${DATA_PERM} ${DATA_DIR}
 else
 	echo "---Quake 3 found, continuing...---"
 fi
 
+echo "---Taking ownership of data...---"
+chown -R root:${GID} /opt/scripts
+chmod -R 750 /opt/scripts
+chown -R ${UID}:${GID} ${DATA_DIR}
+chmod -R ${DATA_PERM} ${DATA_DIR}
+
 echo "---Starting...---"
-chown -R ${UID}:${GID} /opt/scripts
-su ${USER} -c "/opt/scripts/start-server.sh"
+term_handler() {
+	kill -SIGTERM "$killpid"
+	wait "$killpid" -f 2>/dev/null
+	exit 143;
+}
+
+trap 'kill ${!}; term_handler' SIGTERM
+su ${USER} -c "/opt/scripts/start-server.sh" &
+killpid="$!"
+while true
+do
+	wait $killpid
+	exit 0;
+done
